@@ -35,14 +35,19 @@ def edge_detection(image, filter):
     return result
 
 # Load image
-image = cv2.imread("Path_to_your_image")
+image = cv2.imread(r"Vivian.png")
 
 # Resize if needed 
 image = cv2.resize(image, (192*5, 108*5))
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # Convert into Gray scale for 1 channeled image 
 
+# Padding to retain image dimension 
+gray = np.pad(gray[:, :], pad_width=1, mode='constant', constant_values=0)
+
 cv2.imshow("Original Gray Image", gray) # Display gray image
 print("Input image shape:", gray.shape)
+
+# gray = padding(gray)
 
 h_edges = edge_detection(gray, h_filter) # Find out horizontal edges
 v_edges = edge_detection(gray, v_filter) # Find out vertical edges
